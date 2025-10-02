@@ -24,13 +24,16 @@ jobs:
         run: ls -R ./project
 
       - name: Make gradlew executable
-        run: chmod +x ./project/gradlew || true
+        run: chmod +x ./project/gradlew
 
       - name: Build with Gradle
-        run: ./project/gradlew build || true
+        run: ./project/gradlew build
+
+      - name: List build output
+        run: ls -R ./project
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: mod-jar
-          path: ./project/build/libs/*.jar
+          path: ./project/**/*.jar
