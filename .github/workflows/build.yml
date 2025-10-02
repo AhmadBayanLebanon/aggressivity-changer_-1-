@@ -33,7 +33,7 @@ jobs:
 
       # رفع ملف .jar الناتج كـ Artifact
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: aggressivity-changer-jar
           path: ./project/build/libs/*.jar
