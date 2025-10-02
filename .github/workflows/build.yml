@@ -1,0 +1,39 @@
+name: Build Fabric Mod
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # فك مشروع المود الرئيسي
+      - name: Unzip main project
+        run: unzip aggressivity-changer.zip -d project
+
+      # فك ملفات src.zip داخل المشروع
+      - name: Unzip src files
+        run: unzip src.zip -d project/src
+
+      # التحقق من الملفات بعد فك ZIP
+      - name: List files after unzip
+        run: ls -R ./project
+
+      # منح صلاحية تشغيل Gradle Wrapper
+      - name: Grant execute permission for Gradle Wrapper
+        run: chmod +x ./project/gradlew
+
+      # بناء المود
+      - name: Build Mod with Gradle
+        run: ./project/gradlew build
+
+      # رفع ملف .jar الناتج كـ Artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: aggressivity-changer-jar
+          path: ./project/build/libs/*.jar
