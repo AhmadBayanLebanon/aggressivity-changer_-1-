@@ -30,7 +30,7 @@ jobs:
         run: ./project/gradlew build || true
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: mod-jar
           path: ./project/build/libs/*.jar
