@@ -23,6 +23,11 @@ jobs:
       - name: Debug list files
         run: ls -R ./project
 
+      - name: Generate Gradle wrapper
+        run: |
+          cd project
+          gradle wrapper
+
       - name: Make gradlew executable
         run: chmod +x ./project/gradlew
 
